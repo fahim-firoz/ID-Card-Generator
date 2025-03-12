@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+
+<h2>GTF ID Card Generator</h2>
+
+<div class="container">
+  <!-- Box 1: Create ID Card -->
+  <div class="box" onclick="showForm('userForm')">
+    <h3>Enter your details <br> to create ID card</h3>
+  </div>
+
+  <!-- Box 2: Download ID Card -->
+  <div class="box" onclick="showForm('fetchForm')">
+    <h3>Download your <br> ID card</h3>
+  </div>
+</div>
+
+<!-- Form 1: Create ID Card -->
+<form id="userForm">
+  <h3>Enter Your Details</h3>
+  Enter Email <input type="email" name="email" required/><br>
+  Enter First Name <input type="text" name="fname" required /><br>
+  Enter Last Name <input type="text" name="lname" /><br>
+  Enter Phone Number <input type="tel" name="phone" pattern="[0-9]{10}" required /><br>
+  Upload Profile Picture <br><input type="file" name="profile" accept="image/*"/><br>
+  <input type="submit" value="Submit"/>
+</form>
+
+
+<!-- Form 2: Download ID Card -->
+<form id="fetchForm">
+  <h3>Download Your ID Card</h3>
+  Enter Email <input type="text" name="email" required /><br>
+  Enter Phone Number <input type="tel" name="phone" pattern="[0-9]{10}" required /><br>
+  <input type="submit" value="Download"/> 
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module" src="config.js"></script>
+<script type="module" src="dataUpload.js"></script>
+<script type="module" src="dataFetch.js"></script>
+
+<script>
+// ✅ Function to show the form based on the clicked box
+function showForm(formId) {
+  // Hide both forms
+  document.getElementById('userForm').style.display = 'none';
+  document.getElementById('fetchForm').style.display = 'none';
+
+  // Show the selected form
+  const form = document.getElementById(formId);
+  form.style.display = 'block';
+  form.classList.add('fade-in');
+}
+</script>
+
+</body>
+</html>
