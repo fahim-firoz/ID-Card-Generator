@@ -9,6 +9,23 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
   const fname = formData.get('fname');
   const lname = formData.get('lname');
   const phone = formData.get('phone');
+
+  const { data: existingUser, error: fetchError } = await client
+    .from('userDetails')
+    .select('email')
+    .eq('email', email)
+    .single();
+
+  if (fetchError && fetchError.code !== 'PGRST116') { // Ignore "No results found" error
+    console.error(fetchError);
+    alert('❌ Error checking existing users');
+    return;
+  }
+
+  if (existingUser) {
+    alert('⚠️ User already registered with this email!');
+    return;
+  }
   
   // ✅ Fix: Access file directly from input[type=file]
   const profile = document.querySelector('input[name="profile"]').files[0];
